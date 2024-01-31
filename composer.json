@@ -1,6 +1,6 @@
 {
-	"name" : "{{vendor}}/yii2-{{package}}",
-	"description" : "{{package}} Module for Portalium (Yii2)",
+	"name" : "sudesuvar/yii2-todo",
+	"description" : "todo Module for Portalium (Yii2)",
 	"type" : "portalium-module",
 	"license": "MIT",
 	"homepage" : "https://portalium.dev",
@@ -12,11 +12,11 @@
 		}
 	],
 	"support" : {
-		"issues" : "https://github.com/{{vendor}}/yii2-{{package}}/issues"
+		"issues" : "https://github.com/sudesuvar/yii2-todo/issues"
 	},
 	"autoload" : {
 		"psr-4" : {
-			"{{vendor}}\\{{package}}\\" : "src/"
+			"sudesuvar\\todo\\" : "src/"
 		}
 	}
 }

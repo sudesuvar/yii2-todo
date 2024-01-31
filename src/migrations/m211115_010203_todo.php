@@ -4,7 +4,7 @@ use yii\db\Schema;
 use yii\db\Migration;
 use portalium\user\Module as UserModule;
 
-class m211115_010203_{{package}} extends Migration
+class m211115_010203_todo extends Migration
 {
     /* 
         public function safeUp()
