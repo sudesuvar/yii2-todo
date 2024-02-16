@@ -14,6 +14,12 @@
 	"support" : {
 		"issues" : "https://github.com/sudesuvar/yii2-todo/issues"
 	},
+	"require": {
+        "php": ">=7.4.0",
+        "portalium/yii2-site": "*",
+        "portalium/yii2-user": "*",
+        "portalium/yii2-workspace": "*"
+    },
 	"autoload" : {
 		"psr-4" : {
 			"sudesuvar\\todo\\" : "src/"
