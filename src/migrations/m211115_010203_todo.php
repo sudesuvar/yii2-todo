@@ -4,6 +4,7 @@ use yii\db\Schema;
 use yii\db\Migration;
 use portalium\user\Module as UserModule;
 use portalium\workspace\Module as WorkspaceModule;
+use sudesuvar\todo\Module;
 
 class m211115_010203_todo extends Migration
 {
