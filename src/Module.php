@@ -7,7 +7,7 @@ use sudesuvar\todo\components\TriggerActions;
 
 class Module extends \portalium\base\Module
 {
-    public static $tablePrefix = 'todo';
+    public static $tablePrefix = 'todo_';
     
     public static $name = 'todo';
 
