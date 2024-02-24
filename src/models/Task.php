@@ -5,7 +5,11 @@ namespace portalium\todo\models;
 use portalium\content\Module;
 use Yii;
 use portalium\user\models\User;
+use yii\behaviors\AttributeBehavior;
+
 use portalium\workspace\models\Workspace;
+use yii\behaviors\BlameableBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%todo_task}}".
@@ -36,6 +40,32 @@ class Task extends \yii\db\ActiveRecord
         return '{{%todo_task}}';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                //kim tarafından yapıldı
+                'class' => BlameableBehavior::class,
+                'createdByAttribute' => 'id_user',
+                'updatedByAttribute' => 'id_user',
+            ],
+
+            [
+                'class' => AttributeBehavior::class,
+                'attributes' => [
+                    // bir kayıt oluşturulmadan veya güncellenmeden önce  id-workspace'e değer atamak için kullanılır
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'id_workspace',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'id_workspace',
+                    ],
+                'value' => function ($event) {
+                    return Yii::$app->workspace->id;
+                },
+            ]
+
+        ];
+    }
+    
+
     /**
      * {@inheritdoc}
      */
@@ -44,12 +74,14 @@ class Task extends \yii\db\ActiveRecord
         return [
             [['status', 'id_user', 'id_workspace'], 'integer'],
             [['id_user', 'id_workspace'], 'required'],
-            [['date_create', 'date_update'], 'safe'],
+            [['date_create', 'date_update','id_user', 'id_workspace'], 'safe'],
             [['title', 'description'], 'string', 'max' => 255],
-            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id_user']],
-            [['id_workspace'], 'exist', 'skipOnError' => true, 'targetClass' => Workspace::className(), 'targetAttribute' => ['id_workspace' => 'id_workspace']],
+            [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['id_user' => 'id_user']],
+            [['id_workspace'], 'exist', 'skipOnError' => true, 'targetClass' => Workspace::class, 'targetAttribute' => ['id_workspace' => 'id_workspace']],
         ];
     }
+
+
 
     /**
      * {@inheritdoc}
@@ -85,7 +117,7 @@ class Task extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id_user' => 'id_user']);
+        return $this->hasOne(User::class, ['id_user' => 'id_user']);
     }
     public static function getIndexTitle()
     {
@@ -100,6 +132,6 @@ class Task extends \yii\db\ActiveRecord
      */
     public function getWorkspace()
     {
-        return $this->hasOne(Workspace::className(), ['id_workspace' => 'id_workspace']);
+        return $this->hasOne(Workspace::class, ['id_workspace' => 'id_workspace']);
     }
 }

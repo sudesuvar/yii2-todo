@@ -51,19 +51,19 @@ class TaskController extends WebController
      * @return string
      */
 
-     // actionIndex --> tüm görec modellerini listeleyen bir sayfa oluşturur.
-     // kullanıcının belirli yetkilere sahip olup olmadığını kontrol eder.
+    // actionIndex --> tüm görec modellerini listeleyen bir sayfa oluşturur.
+    // kullanıcının belirli yetkilere sahip olup olmadığını kontrol eder.
     public function actionIndex()
     {
-        if (!\Yii::$app->user->can('contentWebCategoryIndex') && !\Yii::$app->user->can('contentWebCategoryIndexOwn'))
+        /* if (!\Yii::$app->user->can('contentWebCategoryIndex') && !\Yii::$app->user->can('contentWebCategoryIndexOwn'))
             //Kullanıcıya "contentWebCategoryIndex" veya "contentWebCategoryIndexOwn" yetkilerinden herhangi biri verilmemişse,hata fırlatılır.
         {
             throw new \yii\web\ForbiddenHttpException(Module::t('You are not allowed to access this page.'));
-        }
+        }*/
         $searchModel = new TaskSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-        if(!\Yii::$app->user->can('contentWebDefaultIndex'))
-            $dataProvider->query->andWhere(['id_user'=>\Yii::$app->user->id]);
+        if (!\Yii::$app->user->can('contentWebDefaultIndex'))
+            $dataProvider->query->andWhere(['id_user' => \Yii::$app->user->id]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -79,17 +79,17 @@ class TaskController extends WebController
      * @throws NotFoundHttpException if the model cannot be found
      */
 
-     // actionView --> Belirli bir görevin detaylarını görüntüler.
-     // kullanıcının bu sayfaya erişim yetkisini kontrol eder.
-    public function actionView($id_task)
+    // actionView --> Belirli bir görevin detaylarını görüntüler.
+    // kullanıcının bu sayfaya erişim yetkisini kontrol eder.
+    public function actionView($id)
     {
-        $model = $this->findModel($id_task);
+        $model = $this->findModel($id);
 
-        if ($model &&!\Yii::$app->user->can('contentWebCategoryView', ['model'=>$this->findModel($id_task)])) {
+        /*if ($model &&!\Yii::$app->user->can('contentWebCategoryView', ['model'=>$this->findModel($id_task)])) {
             throw new \yii\web\ForbiddenHttpException(Module::t('You are not allowed to access this page.'));
-        }
+        }*/
         return $this->render('view', [
-            'model' => $this->findModel($id_task),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -99,29 +99,33 @@ class TaskController extends WebController
      * @return string|\yii\web\Response
      */
 
-     // actionCreate --> yeni bir görev oluşturma sayfasını oluşturur.
-     // form post edildiğinde verileri alır, modeli kaydeder ve gerekli yetkilere sahip olup olmadığını kontrol 
-     // eder.
+    // actionCreate --> yeni bir görev oluşturma sayfasını oluşturur.
+    // form post edildiğinde verileri alır, modeli kaydeder ve gerekli yetkilere sahip olup olmadığını kontrol 
+    // eder.
     public function actionCreate()
     {
-        if (!\Yii::$app->user->can('contentWebCategoryCreate')) {
+        /* if (!\Yii::$app->user->can('contentWebCategoryCreate')) {
             throw new \yii\web\ForbiddenHttpException(Module::t('You are not allowed to access this page.'));
-        }
+        }*/
+
         $model = new Task();
 
+
         if ($this->request->isPost) {
-            $model ->id_user=Yii::$app->user->id; //id_user field dolduran kişinin id_user'ı olmasını sağlar
-            $model ->id_workspace=Yii::$app->workspace->id;//id_workspace field dolduran kişinin id_workspaces'ı olmasını sağlar
+            $model->id_user = Yii::$app->user->id; //id_user field dolduran kişinin id_user'ı olmasını sağlar
+            $model->id_workspace = Yii::$app->workspace->id; //id_workspace field dolduran kişinin id_workspaces'ı olmasını sağlar
 
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_task' => $model->id_task]);
-            }
-            var_dump($model->errors);
-            exit(); // hata yazdırma fonksiyonu
-        } else {
 
-            $model->loadDefaultValues();
-        }
+                return $this->redirect(['view', 'id' => $model->id_task]);
+            } else {
+
+                var_dump($model->attributes);
+                exit;
+                var_dump($model->errors);
+                exit;
+            }
+        } 
 
         return $this->render('create', [
             'model' => $model,
@@ -136,14 +140,14 @@ class TaskController extends WebController
      * @throws NotFoundHttpException if the model cannot be found
      */
 
-     // actionUpdate --> var olan bir görevi güncelleme sayfası oluşturur.
-     // kullanıcının güncelleme yetkisini kontrol eder.
-     // form post edildiğinde verileri alır ve günceller.
+    // actionUpdate --> var olan bir görevi güncelleme sayfası oluşturur.
+    // kullanıcının güncelleme yetkisini kontrol eder.
+    // form post edildiğinde verileri alır ve günceller.
     public function actionUpdate($id)
     {
-        if (!\Yii::$app->user->can('contentWebCategoryUpdate', ['model'=>$this->findModel($id)])) {
+        /* if (!\Yii::$app->user->can('contentWebCategoryUpdate', ['model'=>$this->findModel($id)])) {
         throw new \yii\web\ForbiddenHttpException(Module::t('You are not allowed to access this page.'));
-    }
+    }*/
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -163,15 +167,15 @@ class TaskController extends WebController
      * @throws NotFoundHttpException if the model cannot be found
      */
 
-     // actionDelete --> var olan bi görevi siler. 
-     // kullanıcının silme yetkisini kontrol eder.
+    // actionDelete --> var olan bi görevi siler. 
+    // kullanıcının silme yetkisini kontrol eder.
     public function actionDelete($id)
     {
-        if (!\Yii::$app->user->can('contentWebCategoryDelete', ['model'=>$this->findModel($id)])) {
+        /*if (!\Yii::$app->user->can('contentWebCategoryDelete', ['model'=>$this->findModel($id)])) {
             throw new \yii\web\ForbiddenHttpException(Module::t('You are not allowed to access this page.'));
-        }
+        }*/
 
-        if($this->findModel($id)->delete()){
+        if ($this->findModel($id)->delete()) {
             Yii::$app->session->addFlash('info', Module::t('Task has been deleted'));
         }
 

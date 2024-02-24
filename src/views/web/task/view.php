@@ -19,31 +19,35 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="task-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id_task' => $model->id_task], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id_task' => $model->id_task], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
+<?php Panel::begin([
+        'title' => $this->title,
+        'actions' => [
+            Html::a(Module::t(''), ['update', 'id' => $model->id_task], ['class' => 'btn btn-primary fa fa-pencil']),
+            Html::a(Module::t(''), ['delete', 'id' => $model->id_task], [
+                'class' => 'btn btn-danger fa fa-trash',
+                'data' => [
+                    'confirm' => Module::t('Are you sure you want to delete this item?'),
+                    'method' => 'post',
+                ],
+            ])
+        ]
+    ]) ?>
     <?= DetailView::widget([
+
         'model' => $model,
         'attributes' => [
             'id_task',
             'title',
-            'description',
-            'status',
-            'id_user',
-            'id_workspace',
+         //   'description',
+            [
+                'attribute' => 'status',
+                'value' => Task::getStatusList()['STATUS'][$model->status],
+            ],
+           // 'id_workspace',
             'date_create',
             'date_update',
         ],
-    ]) ?>
+    ]); Panel::end() ?>
+
 
 </div>

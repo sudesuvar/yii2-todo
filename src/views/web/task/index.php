@@ -7,6 +7,7 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use portalium\theme\widgets\Panel;
 use portalium\content\Module;
+use portalium\theme\widgets\ActionColumn as WidgetsActionColumn;
 
 /** @var yii\web\View $this */
 /** @var portalium\todo\models\TaskSearch $searchModel */
@@ -38,13 +39,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_task',
             'title',
             'description',
-            'status',
+            //'status',
             //'id_user',
             //'id_workspace',
             //'date_create',
             //'date_update',
             [
-                'class' => ActionColumn::className(),
+                'class' => WidgetsActionColumn::class,
             ],
         ],
     ]); ?>
