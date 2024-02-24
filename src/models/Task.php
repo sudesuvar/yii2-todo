@@ -40,7 +40,7 @@ class Task extends \yii\db\ActiveRecord
         return '{{%todo_task}}';
     }
 
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             [
@@ -63,7 +63,7 @@ class Task extends \yii\db\ActiveRecord
             ]
 
         ];
-    }
+    }*/
     
 
     /**
@@ -89,14 +89,14 @@ class Task extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_task' => 'Id Task',
-            'title' => 'Title',
-            'description' => 'Description',
-            'status' => 'Status',
-            'id_user' => 'Id User',
-            'id_workspace' => 'Id Workspace',
-            'date_create' => 'Date Create',
-            'date_update' => 'Date Update',
+            'id_task' => Module::t('Id Task'),
+            'title' => Module::t('Title'),
+            'description' => Module::t('Description'),
+            'status' => Module::t('Status'),
+            'id_user' =>  Module::t('Id User'),
+            'id_workspace' => Module::t('Id Workspace'),
+            'date_create' =>  Module::t('Date Create'),
+            'date_update' => Module::t('Date Update'),
         ];
     }
     public static function getStatusList()
