@@ -119,12 +119,6 @@ class Task extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::class, ['id_user' => 'id_user']);
     }
-    public static function getIndexTitle()
-    {
-        // Başlığı veritabanından çekerek döndürün
-        $indexTitle = self::find()->select('title')->one();
-        return $indexTitle;
-    }
     /**
      * Gets query for [[Workspace]].
      *
