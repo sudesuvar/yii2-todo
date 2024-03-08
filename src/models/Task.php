@@ -2,7 +2,7 @@
 
 namespace portalium\todo\models;
 
-use portalium\content\Module;
+use sudesuvar\todo\Module;
 use Yii;
 use portalium\user\models\User;
 use yii\behaviors\AttributeBehavior;
