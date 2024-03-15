@@ -1,12 +1,11 @@
 <?php
 
-namespace portalium\todo\models;
+namespace sudesuvar\todo\models;
 
 use sudesuvar\todo\Module;
 use Yii;
 use portalium\user\models\User;
 use yii\behaviors\AttributeBehavior;
-
 use portalium\workspace\models\Workspace;
 use yii\behaviors\BlameableBehavior;
 use yii\db\ActiveRecord;
