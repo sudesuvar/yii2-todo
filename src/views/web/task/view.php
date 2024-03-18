@@ -48,6 +48,4 @@ $this->params['breadcrumbs'][] = $this->title;
             'date_update',
         ],
     ]); Panel::end() ?>
-
-
 </div>
