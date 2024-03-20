@@ -1,6 +1,6 @@
 <?php
 
-namespace sudesuvar\todo\models;
+namespace portalium\todo\models;
 
 use sudesuvar\todo\Module;
 use Yii;
@@ -126,5 +126,23 @@ class Task extends \yii\db\ActiveRecord
     public function getWorkspace()
     {
         return $this->hasOne(Workspace::class, ['id_workspace' => 'id_workspace']);
+    }
+
+
+    public static function widgets()
+    {
+        //tümünü görüntüleme yetkisi varsa
+        if(Yii::$app->user->can('todoWebtaskIndex'))
+        {
+            return Task::find()->all();
+        }
+
+        //sadece kendini görüntüleme yetkisi varsa
+        /*if (Yii::$app->user->can('todoWebTaskIndexOwn')) {
+
+            return Task::findOne(1)->andWhere(['id_user'=>\Yii::$app->user->id]);
+        }*/
+
+
     }
 }
