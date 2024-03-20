@@ -1,5 +1,60 @@
 
-#widgetButton button{
-    border-style: none;
-    color: #fff;
+.dropdown-menu {
+    max-height: 200px; /* Dropdown maksimum yüksekliğini belirleyin, isteğe bağlı */
+   /* Düşüş menüsü içinde kaydırma çubuğunu etkinleştirin, isteğe bağlı */
+}
+.task-heading {
+    height: 30px;
+    color: black;
+}
+/* içeriğin rengini değiştiriyor*/
+.list {
+    max-height: 20px;
+    margin-top: 0;
+    font-size: medium;
+    color: #000000;
+    list-style: none;
+}
+.menu-title{
+    font-size: 1rem;
+    color:black;
+    font-weight: bold;
+    background: white;
+}
+.item-info{
+    margin-top: 0px;
+}
+.description{
+    font-size: 12px;
+}
+.dropdown-item2{
+    background: white;
+}
+.dropdown-item2:hover{
+ background:#fdf7f7;
+}
+.dropdown-toggle::after{
+    color: #fdf7f7;
+    right: 11px;
+}
+.fa-bell-slash{
+    color:white;
+    font-size: 1.5rem;
+}
+.fa-bell{
+  color:white;
+    font-size: 1.5rem;
+}
+.dropFixed{
+    max-height: 100px;
+}
+.elipse{
+    text-overflow:ellipsis ;
+    overflow-x: hidden;
+}
+.height150{
+height: 30px;
+}
+.whiteclass{
+background-color: white;
 }

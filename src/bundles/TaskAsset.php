@@ -11,7 +11,7 @@ class TaskAsset extends AssetBundle
 
     //task.css dosyasının kullanılacağını belirtiyoruz
     public $css = [
-        'css/task.css'
+        'task.css'
     ];
 
     //koddaki değişikliğin ön yüzde güncel olmasını sağlar

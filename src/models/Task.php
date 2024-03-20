@@ -138,10 +138,10 @@ class Task extends \yii\db\ActiveRecord
         }
 
         //sadece kendini görüntüleme yetkisi varsa
-        /*if (Yii::$app->user->can('todoWebTaskIndexOwn')) {
+        //if (Yii::$app->user->can('todoWebTaskIndexOwn')) {
 
-            return Task::findOne(1)->andWhere(['id_user'=>\Yii::$app->user->id]);
-        }*/
+          //  return Task::findOne(1)->andWhere(['id_user'=>\Yii::$app->user->id]);
+        //}
 
 
     }

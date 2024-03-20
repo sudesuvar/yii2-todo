@@ -14,15 +14,13 @@ use portalium\todo\models\Task as todoTask;
 
 class Task extends Widget
 {
-
-    public $text;
     public $tasks;
 
   //işlemleri başlatan fonksiyon
     public function init()
     {
         // text in ilk harfini büyük yapar upper case
-        $this->text = ucfirst($this->text);
+        //$this->text = ucfirst($this->text);
         // yapıcı method
     }
 
@@ -31,14 +29,25 @@ class Task extends Widget
     public function run()
     {
         parent::run();
-        TaskAsset::register($this->getView());
-        //return '<button> buton </button>';
-        return $this->render('sudesuvar/todo/widgets/views/task',[
+        $tasks=TodoTask::widgets();
+
+        // widgets altındaki viewse render eder
+        return $this->render('task',[
+            'tasks'=>$tasks
+
         ]);
 
-
-    
         // TaskAsset'i sayfaya kaydediyoruz
+        TaskAsset::register($this->getView());
+        //return '<button> buton </button>';
+        //return $this->render('sudesuvar/todo/widgets/views/task',[
+        //]);
+        //return $this->render('widgets/views/task');
+
+        //$tasks=TodoTask::widgets();
+        //return $this->render('task',[
+        //  'tasks'=>$tasks]);
+        //return $this->renderFile("@vendor/sudesuvar/yii2-todo/src/widgets/views/task.php",[]);
     }
 
 }
