@@ -18,9 +18,29 @@ class Module extends \portalium\base\Module
             'class' => 'yii\rest\UrlRule',
             'controller' => [
                 'todo/default',
-            ]
+                'todo/task',
+            ],
+            'pluralize'=>false
         ],
     ];
+    public function getMenuItems()
+    {
+        $menuItems = [
+            [
+
+                [
+                    'menu' => 'web',
+                    'type' => 'widget',
+                    'label' => 'sudesuvar\todo\widgets\task',
+                    'name' => 'task',
+                ],
+                
+            ],
+        ];
+        return $menuItems;
+    }
+
+
     
     public static function moduleInit()
     {
