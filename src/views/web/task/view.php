@@ -17,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 //  \yii\web\YiiAsset::register($this) --> Yii'nin sağladığı temel javascript ve css dosyalarını sayfaya ekler.
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="task-view">
 
+   
 <?php Panel::begin([
         'title' => $this->title,
         'actions' => [

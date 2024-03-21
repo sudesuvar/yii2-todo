@@ -55,6 +55,11 @@ class TaskController extends WebController
     // kullanıcının belirli yetkilere sahip olup olmadığını kontrol eder.
     public function actionIndex()
     {
+        // component örneği
+        //echo Yii::$app->TaskComponent->welcome();
+        //exit;
+
+        
          if (!\Yii::$app->user->can('todoWebtaskIndexOwn'))
             //&& !\Yii::$app->user->can('contentWebCategoryIndexOwn')
             //Kullanıcıya "contentWebCategoryIndex" veya "contentWebCategoryIndexOwn" yetkilerinden herhangi biri verilmemişse,hata fırlatılır.
@@ -84,6 +89,7 @@ class TaskController extends WebController
     // kullanıcının bu sayfaya erişim yetkisini kontrol eder.
     public function actionView($id)
     {
+
         $model = $this->findModel($id);
 
         if ($model &&!\Yii::$app->user->can('todoWebtaskView', ['model'=>$this->findModel($id)])) {
