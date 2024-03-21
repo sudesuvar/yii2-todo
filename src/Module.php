@@ -4,6 +4,8 @@ namespace sudesuvar\todo;
 
 use portalium\base\Event;
 use sudesuvar\todo\components\TriggerActions;
+use portalium\site\components\TaskComponent;
+use portalium\site\models\Task;
 
 class Module extends \portalium\base\Module
 {
@@ -35,9 +37,20 @@ class Module extends \portalium\base\Module
                     'name' => 'task',
                 ],
                 
+                
             ],
         ];
         return $menuItems;
+    }
+
+    // register components
+
+    public function registerComponents(){
+        return [
+                'TaskComponent' => [
+                    'class' => 'sudesuvar\todo\components\TaskComponent',      
+                ],
+        ];
     }
 
 
@@ -54,10 +67,10 @@ class Module extends \portalium\base\Module
         return parent::coreT('todo', $message, $params);
     }
 
-    /* 
-        public function registerEvents()
+     
+        /*public function registerEvents()
         {
             Event::on($this::className(), UserModule::EVENT_USER_DELETE_BEFORE, [new TriggerActions(), 'onUserDeleteBefore']);
-        } 
-    */
+        } */
+    
 }
